@@ -1,0 +1,39 @@
+version: '3'
+services:
+  web1:
+    build: .
+    container_name: web1
+    networks:
+      - centos-httpd-net
+    cap_add:
+      - NET_ADMIN     # 允许管理网络接口和防火墙
+      - NET_RAW       # 允许使用 RAW 套接字（ping/ICMP）
+    ports:
+      - "8081:80"   # HTTP 端口映射
+      - "2221:22"   # SSH 端口映射
+  web2:
+    build: .
+    container_name: web2
+    networks:
+      - centos-httpd-net
+    cap_add:
+      - NET_ADMIN     # 允许管理网络接口和防火墙
+      - NET_RAW       # 允许使用 RAW 套接字（ping/ICMP）
+    ports:
+      - "8082:80"
+      - "2222:22"
+  web3:
+    build: .
+    container_name: web3
+    networks:
+      - centos-httpd-net
+    cap_add:
+      - NET_ADMIN     # 允许管理网络接口和防火墙
+      - NET_RAW       # 允许使用 RAW 套接字（ping/ICMP）
+    ports:
+      - "8083:80"
+      - "2223:22"
+
+networks:
+  centos-httpd-net:
+    driver: bridge
